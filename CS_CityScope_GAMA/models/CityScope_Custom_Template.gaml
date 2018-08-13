@@ -21,22 +21,21 @@ global{
 	float step <- 5 #mn;
 	list<BlockCar> freeBlockCars <- nil;
 	init{
+		
+    }
+		
+	action  customInit{
 		create BlockCar number: nbBlockCar;
 		freeBlockCars <- BlockCar where(each.isFree = "true");
-		}
-		
-	reflex creationUser{
-		if(cycle = 1){
-			create BlockCarUser number: nbBlockCarUser{
-				home <- one_of(world.amenity);
-				location <- any_location_in (home);
-				write(location);
-				work <- one_of(world.building);
-				write(any_location_in(work));
-				write("-------------------------");
-			}
-		}
+	    create BlockCarUser number: nbBlockCarUser{
+	      home <- one_of(world.amenity);
+		  location <- any_location_in (home);
+		  write(location);
+		  work <- one_of(world.building);
+		  write(any_location_in(work));
+		  write("-------------------------");
 	}
+  }
 }
 
 species BlockCarUser skills:[moving]{
